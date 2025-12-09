@@ -1,0 +1,348 @@
+/* ImageShower.css */
+.image-container {
+  width: 100%;
+  background: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Image wrapper with shadow and border */
+.image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.study-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.study-image:hover {
+  transform: scale(1.02);
+}
+
+/* Image description with better formatting */
+.image-description {
+  padding: 25px;
+  background: linear-gradient(180deg, 
+    rgba(20, 23, 29, 0.9) 0%,
+    rgba(11, 12, 16, 0.95) 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 20px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.description-title {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 77, 109, 0.3);
+}
+
+.description-title::before {
+  content: "";
+  font-size: 1.3rem;
+}
+
+.description-text {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* Line formatting */
+.description-line {
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+  text-align: justify;
+}
+
+.description-line:last-child {
+  margin-bottom: 0;
+}
+
+.description-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* Bullet point styling */
+.description-line.bullet-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-left: 0;
+}
+
+.description-line.bullet-point::before {
+  display: none;
+}
+
+.bullet {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Loading state */
+.image-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--text-secondary);
+  z-index: 10;
+  background: rgba(20, 23, 29, 0.8);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.image-error {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  background: rgba(20, 23, 29, 0.9);
+  border-radius: 16px;
+  min-height: 300px;
+  margin: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.error-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.image-error h3 {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.image-error p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.image-error-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  max-width: 500px;
+  width: 100%;
+  text-align: left;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.image-error-info p {
+  margin: 0;
+  word-break: break-all;
+}
+
+.open-link-btn {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.open-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+}
+
+/* Placeholder */
+.image-placeholder {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  gap: 16px;
+  margin: 20px;
+}
+
+.image-placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .image-wrapper {
+    margin: 10px;
+    border-radius: 8px;
+  }
+  
+  .image-description {
+    padding: 20px 15px;
+    margin: 10px;
+    border-radius: 8px;
+  }
+  
+  .description-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .description-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .description-line {
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+  
+  .image-error {
+    padding: 30px 15px;
+    margin: 15px;
+  }
+  
+  .error-icon {
+    font-size: 50px;
+  }
+  
+  .image-error h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .image-wrapper {
+    margin: 30px 40px;
+    border-radius: 16px;
+  }
+  
+  .study-image {
+    max-height: 70vh;
+  }
+  
+  .image-description {
+    margin: 0 40px 30px;
+    border-radius: 16px;
+  }
+  
+  .description-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+}
+
+/* Scrollbar for long descriptions */
+.image-description {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.image-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.image-description::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.image-description::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.image-description::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}

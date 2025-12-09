@@ -1,0 +1,63 @@
+.navigation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 2px solid #333;
+  border-radius: var(--border-radius);
+  width: 100%;
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--secondary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.nav-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-arrow {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.nav-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.prev-btn .nav-arrow {
+  transform: rotate(180deg);
+}
+
+.nav-instruction {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: var(--spacing-sm);
+}
+
+.swipe-hint {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+}

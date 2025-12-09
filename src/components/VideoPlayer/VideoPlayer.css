@@ -1,0 +1,120 @@
+/* Video container - Fits between header and footer */
+.video-container {
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Shorts container - Takes available space */
+.video-container.short {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full video container */
+.video-container.full {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Video wrapper - Flexible within container */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Regular videos (16:9) - Auto height within available space */
+.video-container.full .video-wrapper {
+  /* Remove padding-bottom for flexible height */
+  height: auto;
+}
+
+/* YouTube iframe - fills video wrapper */
+.youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #000;
+}
+
+/* Loading state */
+.video-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* placeholder */
+.video-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  min-height: 0;
+}
+
+.video-placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+/* Full video specific styles */
+.video-container.full .video-wrapper {
+  /* For 16:9 aspect ratio within available space */
+  aspect-ratio: 16 / 9;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Shorts specific styles */
+.video-container.short .video-wrapper {
+  /* Shorts aspect ratio */
+  aspect-ratio: 9 / 16;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .video-container.short .video-wrapper {
+    max-width: 100%;
+  }
+  
+  .video-container.full .video-wrapper {
+    max-width: 100%;
+  }
+}
