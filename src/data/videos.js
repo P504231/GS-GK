@@ -59,6 +59,7 @@ const gsVideos = [
     category: "Science",
   },
 
+  //Scheme-----------------------------------------------
   {
     id: 11,
     youtubeLink: "https://www.youtube.com/watch?v=ZDUajSr43FQ",
@@ -69,8 +70,13 @@ const gsVideos = [
     youtubeLink: "https://www.youtube.com/shorts/nJ6DzJJ5Kv4",
     category: "Scheme",
   },
+  {
+    id: 13,
+    youtubeLink: "https://www.youtube.com/shorts/75XeEnSpbbI",
+    category: "Scheme",
+  },
 
-  //12
+  //13. https://www.youtube.com/shorts/75XeEnSpbbI
 
   // Add as many as you want
 ];
