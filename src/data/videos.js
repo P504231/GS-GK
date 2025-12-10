@@ -69,15 +69,9 @@ const gsVideos = [
     youtubeLink: "https://www.youtube.com/shorts/nJ6DzJJ5Kv4",
     category: "Scheme",
   },
-  {
-    id: 13,
-    youtubeLink: "https://www.youtube.com/watch?v=VVBziwNCHq8&list=RD1a5nyrMtRsk",
-    category: "Scheme",
-  },
 
+  //12
 
-
-  //12. https://www.youtube.com/watch?v=VVBziwNCHq8&list=RD1a5nyrMtRsk
   // Add as many as you want
 ];
 
