@@ -52,7 +52,7 @@ useEffect(() => {
   // Combine both
   const combinedContent = [...enrichedVideos, ...enrichedNotes];
   
-  console.log('All content:', combinedContent);
+  // console.log('All content:', combinedContent);
   
   setVideos(enrichedVideos);
   setPictorialNotes(enrichedNotes);

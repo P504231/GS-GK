@@ -18,7 +18,7 @@ const Header = ({
         <div className="header-left">
           <h1 className="header-title">GS Revision</h1>
           <div className="small-meta">
-            <span className="current-video">Content: {totalContent}</span>
+            {/* <span className="current-video">Content: {totalContent}</span> */}
             <span className="category-tag">{categoryFilter || 'All'}</span>
           </div>
         </div>
