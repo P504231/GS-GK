@@ -31,8 +31,11 @@ const gsVideos = [
     youtubeLink: "https://www.youtube.com/shorts/Zw1m0SLYikQ",
     category: "Geography",
   },
-
-
+  {
+    id: 15,
+    youtubeLink: "https://www.youtube.com/shorts/5oOH3884PzE",
+    category: "Geography",
+  },
 
   //
 
@@ -52,12 +55,19 @@ const gsVideos = [
     youtubeLink: "https://www.youtube.com/shorts/0_nhrV9ocwU",
     category: "Polity",
   },
+  //Science-----------------------------------------------
 
   {
     id: 10,
     youtubeLink: "https://www.youtube.com/shorts/Q0iUkZrhi4k",
     category: "Science",
   },
+  {
+    id: 14,
+    youtubeLink: "https://www.youtube.com/shorts/anYAY7CVcyE",
+    category: "Science",
+  },
+
 
   //Scheme-----------------------------------------------
   {
@@ -75,8 +85,13 @@ const gsVideos = [
     youtubeLink: "https://www.youtube.com/shorts/75XeEnSpbbI",
     category: "Scheme",
   },
+  {
+    id: 16,
+    youtubeLink: "https://www.youtube.com/watch?v=dyDHX04aRSU&list=PLux0bfDVP1GinAJTetI8WjxCrUhWG5mM0",
+    category: "Scheme",
+  },
 
-  //13. https://www.youtube.com/shorts/75XeEnSpbbI
+  //16+. https://www.youtube.com/watch?v=dyDHX04aRSU&list=PLux0bfDVP1GinAJTetI8WjxCrUhWG5mM0
 
   // Add as many as you want
 ];

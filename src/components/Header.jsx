@@ -1,5 +1,5 @@
 import React from 'react';
-// import './Header.css';
+import './Header.css';
 
 const Header = ({
   totalContent,
@@ -10,39 +10,126 @@ const Header = ({
   hasPrevious,
   hasNext,
 }) => {
-  const categories = ["All", "Polity", "History", "Geography", "Economics", "Science", "Scheme", "Current Affairs", "Static GK", "Pictorial Notes"];
+  const categories = [
+    { name: "All", icon: "📚", color: "#6d28d9" },
+    { name: "Polity", icon: "⚖️", color: "#dc2626" },
+    { name: "History", icon: "🏛️", color: "#059669" },
+    { name: "Geography", icon: "🌍", color: "#0891b2" },
+    { name: "Economics", icon: "💰", color: "#ea580c" },
+    { name: "Science", icon: "🔬", color: "#7c3aed" },
+    { name: "Scheme", icon: "📋", color: "#0d9488" },
+    { name: "Current Affairs", icon: "📰", color: "#be185d" },
+    { name: "Static GK", icon: "🧠", color: "#a16207" },
+    { name: "Pictorial Notes", icon: "🎨", color: "#db2777" },
+  ];
+
+  // Get current category color
+  const currentCategory = categories.find(cat => 
+    cat.name === (categoryFilter || "All")
+  );
+  const activeColor = currentCategory?.color || "#6d28d9";
 
   return (
-    <header className="header">
-      <div className="header-row">
-        <div className="header-left">
-          <h1 className="header-title">GS Revision</h1>
-          <div className="small-meta">
-            {/* <span className="current-video">Content: {totalContent}</span> */}
-            <span className="category-tag">{categoryFilter || 'All'}</span>
+    <header className="header" style={{ '--active-color': activeColor }}>
+      {/* Top Gradient Bar */}
+      <div className="gradient-bar"></div>
+      
+      <div className="header-container">
+        {/* Main Header Row */}
+        <div className="header-main-row">
+          {/* Logo and Title Section */}
+          <div className="header-brand">
+            <div className="logo-container">
+              <div className="logo-icon">📖</div>
+              <div className="logo-glow"></div>
+            </div>
+            <div className="brand-text">
+              <h1 className="header-title">
+                <span className="title-gs">GS</span>
+                <span className="title-revision">Revision Pro</span>
+              </h1>
+              <div className="subtitle">Master Your Preparation • Ace Every Exam</div>
+            </div>
+          </div>
+
+          {/* Stats and Navigation */}
+          <div className="header-right-section">
+            {/* Content Stats */}
+            <div className="stats-badge">
+              <div className="stats-icon">📊</div>
+              <div className="stats-content">
+                <span className="stats-count">{totalContent}</span>
+                <span className="stats-label">Resources</span>
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="nav-controls">
+              <button 
+                className={`nav-btn prev-btn ${!hasPrevious ? 'disabled' : ''}`}
+                onClick={onPrev} 
+                disabled={!hasPrevious}
+                aria-label="Previous"
+              >
+                <span className="nav-btn-icon">◀</span>
+                <span className="nav-btn-text">Prev</span>
+              </button>
+              
+              <div className="nav-counter">
+                <span className="counter-label">Navigate</span>
+                <div className="counter-arrows">
+                  <span className="arrow-up">↑</span>
+                  <span className="arrow-down">↓</span>
+                </div>
+              </div>
+              
+              <button 
+                className={`nav-btn next-btn ${!hasNext ? 'disabled' : ''}`}
+                onClick={onNext} 
+                disabled={!hasNext}
+                aria-label="Next"
+              >
+                <span className="nav-btn-text">Next</span>
+                <span className="nav-btn-icon">▶</span>
+              </button>
+            </div>
+
+            {/* Active Category Badge */}
+            <div className="active-category-badge" style={{ backgroundColor: activeColor }}>
+              <span className="badge-icon">{currentCategory?.icon || "📚"}</span>
+              <span className="badge-text">{categoryFilter || "All"}</span>
+            </div>
           </div>
         </div>
 
-        <div className="header-nav-buttons">
-          <button className="header-arrow" onClick={onPrev} disabled={!hasPrevious} aria-label="Previous">
-            ⬆️
-          </button>
-          <button className="header-arrow" onClick={onNext} disabled={!hasNext} aria-label="Next">
-            ⬇️
-          </button>
+        {/* Category Filter Bar */}
+        <div className="category-filters-container">
+          <div className="category-filters-label">
+            <span className="filter-icon">🎯</span>
+            <span>Filter by Category:</span>
+          </div>
+          
+          <div className="category-filters-scroll">
+            {categories.map(category => {
+              const isActive = categoryFilter === (category.name === "All" ? "" : category.name);
+              return (
+                <button
+                  key={category.name}
+                  className={`category-filter-btn ${isActive ? 'active' : ''}`}
+                  onClick={() => setCategoryFilter(category.name === "All" ? "" : category.name)}
+                  style={{
+                    '--category-color': category.color,
+                    backgroundColor: isActive ? category.color : 'transparent'
+                  }}
+                >
+                  <span className="category-icon">{category.icon}</span>
+                  <span className="category-name">{category.name}</span>
+                  {isActive && <span className="active-indicator"></span>}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-
-      <div className="category-filters">
-        {categories.map(category => (
-          <button
-            key={category}
-            className={`category-btn ${categoryFilter === (category === "All" ? "" : category) ? 'active' : ''}`}
-            onClick={() => setCategoryFilter(category === "All" ? "" : category)}
-          >
-            {category === "Pictorial Notes" ? "📷 " + category : category}
-          </button>
-        ))}
       </div>
     </header>
   );
