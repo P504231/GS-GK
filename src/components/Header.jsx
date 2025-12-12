@@ -12,6 +12,7 @@ const Header = ({
 }) => {
   const categories = [
     { name: "All", icon: "📚", color: "#6d28d9" },
+    { name: "AEDO", icon: "🏢", color: "#113300" },
     { name: "Polity", icon: "⚖️", color: "#dc2626" },
     { name: "History", icon: "🏛️", color: "#059669" },
     { name: "Geography", icon: "🌍", color: "#0891b2" },

@@ -1,43 +1,89 @@
+/* components/ProgressIndicator.css */
+
 .progress-indicator {
-  background: var(--bg-secondary);
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  margin-top: 20px;
 }
 
+.dots-container,
 .progress-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
-  margin-bottom: var(--spacing-md);
+  gap: 8px;
+  max-width: 90%;
 }
 
-.progress-dot {
+/* --- UNIVERSAL DOT STYLE --- */
+.dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #333;
+  background: #1e3a8a;       /* DARK BLUE */
+  border: 2px solid #1e3a8a; /* DARK BLUE */
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  padding: 0;
 }
 
-.progress-dot.active {
-  transform: scale(1.3);
+.dot:hover:not(.active):not(:disabled) {
+  transform: scale(1.2);
+  background: #274bbf;     /* LIGHTER BLUE */
+  border-color: #274bbf;
 }
 
-.progress-dot.shorts.active {
-  background: var(--primary-color);
+/* --- ACTIVE (CURRENT) DOT --- */
+.dot.active {
+  background: white;
+  border-color: white;
+  transform: scale(1.25);
+  cursor: default;
 }
 
-.progress-dot.full.active {
-  background: var(--accent-color);
+.dot.active:hover {
+  transform: scale(1.25);
 }
 
-.progress-dot:hover:not(.active) {
-  background: #666;
-}
-
-.progress-text {
-  text-align: center;
-  color: var(--text-secondary);
+/* Progress Text */
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.current-position {
+  font-weight: bold;
+  color: white;
+}
+
+.type-indicator {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dots-container,
+  .progress-bar {
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .progress-info {
+    font-size: 0.8rem;
+  }
 }

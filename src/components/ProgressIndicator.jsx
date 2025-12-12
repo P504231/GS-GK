@@ -1,24 +1,55 @@
 import React from 'react';
+import './ProgressIndicator.css';
 
-const ProgressIndicator = ({ videos, currentIndex, categoryFilter, onDotClick }) => {
-  const filteredVideos = categoryFilter ? videos.filter(v => v.category === categoryFilter) : videos;
+const ProgressIndicator = ({ 
+  items, 
+  currentDotIndex, 
+  onDotClick,
+  currentItem
+}) => {
+
+  if (!items || items.length === 0) return null;
+
+  // ACTIVE = white dot, INACTIVE = blue dot
+  const getDotClass = (index) => {
+    return index === currentDotIndex ? "dot active" : "dot";
+  };
+
+  const getDotLabel = (item, index) => {
+    if (item.type === 'image') return `Pictorial Note ${index + 1}`;
+    if (item.type === 'video' && item.isShort) return `Short ${index + 1}`;
+    return `Video ${index + 1}`;
+  };
 
   return (
     <div className="progress-indicator">
+      
       <div className="progress-bar">
-        {filteredVideos.map((video, index) => (
+        {items.map((item, index) => (
           <button
-            key={video.id}
-            className={`progress-dot ${index === currentIndex ? 'active' : ''} ${video.isShort ? 'shorts' : 'full'}`}
-            title={`${video.title || 'Video'} (${video.category})`}
-            aria-label={`Jump to ${video.title || 'video'}`}
-            onClick={() => onDotClick && onDotClick(index)}
+            key={item.id}
+            className={getDotClass(index)}
+            onClick={() => onDotClick(index)}
+            aria-label={getDotLabel(item, index)}
+            title={item.title || getDotLabel(item, index)}
           />
         ))}
       </div>
-      <div className="progress-text">
-        {currentIndex + 1} of {filteredVideos.length} {categoryFilter ? `in ${categoryFilter}` : 'videos'}
+
+      <div className="progress-info">
+        <span className="current-position">
+          {currentDotIndex + 1} / {items.length}
+        </span>
+
+        {currentItem?.type === 'image' && (
+          <span className="type-indicator">• Pictorial Note</span>
+        )}
+
+        {currentItem?.type === 'video' && currentItem?.isShort && (
+          <span className="type-indicator">• Short</span>
+        )}
       </div>
+
     </div>
   );
 };
