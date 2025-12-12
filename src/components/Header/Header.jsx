@@ -11,18 +11,20 @@ const Header = ({
   hasNext,
 }) => {
   const categories = [
-    { name: "All", icon: "📚", color: "#6d28d9" },
-    { name: "AEDO", icon: "🏢", color: "#113300" },
-    { name: "Polity", icon: "⚖️", color: "#dc2626" },
-    { name: "History", icon: "🏛️", color: "#059669" },
-    { name: "Geography", icon: "🌍", color: "#0891b2" },
-    { name: "Economics", icon: "💰", color: "#ea580c" },
-    { name: "Science", icon: "🔬", color: "#7c3aed" },
-    { name: "Scheme", icon: "📋", color: "#0d9488" },
-    { name: "Current Affairs", icon: "📰", color: "#be185d" },
-    { name: "Static GK", icon: "🧠", color: "#a16207" },
-    { name: "Pictorial Notes", icon: "🎨", color: "#db2777" },
-  ];
+  { name: "All", icon: "📚", color: "#6d28d9" },
+  { name: "AEDO", icon: "🏢", color: "#113300" },
+  { name: "Polity", icon: "⚖️", color: "#dc2626" },
+  { name: "History", icon: "🏛️", color: "#059669" },
+  { name: "Geography", icon: "🌍", color: "#0891b2" },
+  { name: "Economics", icon: "💰", color: "#ea580c" },
+  { name: "Science", icon: "🔬", color: "#7c3aed" },
+  { name: "Scheme", icon: "📋", color: "#0d9488" },
+  { name: "Current Affairs", icon: "📰", color: "#be185d" },
+  { name: "Static GK", icon: "🧠", color: "#a16207" },
+  { name: "Pictorial Notes", icon: "🎨", color: "#db2777" },
+  { name: "PDF Notes", icon: "📄", color: "#0ea5e9" },  // ⭐ NEW
+];
+
 
   // Get current category color
   const currentCategory = categories.find(cat => 

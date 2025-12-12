@@ -70,7 +70,7 @@ const gsVideos = [
     category: "Scheme",
   },
   {
-    youtubeLink: "https://www.youtube.com/watch?v=dyDHX04aRSU&list=PLux0bfDVP1GinAJTetI8WjxCrUhWG5mM0",
+    youtubeLink: "https://www.youtube.com/watch?v=dyDHX04aRSU",
     category: "Scheme",
   },
     /* ===========================================AEDO=========================================== */
@@ -92,6 +92,14 @@ const gsVideos = [
   },
   {
     youtubeLink:"https://www.youtube.com/watch?v=AS7tehVnw5g",
+    category:"AEDO",
+  },
+  {
+    youtubeLink:"https://www.youtube.com/watch?v=S9Nfq4OyX0I",
+    category:"AEDO",
+  },
+  {
+    youtubeLink:"https://www.youtube.com/watch?v=Zn6F8xVftX4",
     category:"AEDO",
   }
 ];

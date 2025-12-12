@@ -14,7 +14,6 @@ const ImageShower = ({ image }) => {
     );
   }
 
-  // Handle both ImageLink and imageLink property names
   const imageUrl = image.ImageLink || image.imageLink || null;
   const description = image.Description || image.description || "";
 
@@ -36,18 +35,14 @@ const ImageShower = ({ image }) => {
     setImageError(true);
   };
 
-  // Function to render description with line breaks
   const renderDescription = (text) => {
     if (!text) return null;
-    
-    // Split by multiple line break patterns
     const lines = text.split(/(?:\r\n|\r|\n|----|---)/);
     
     return lines.map((line, index) => {
       const trimmedLine = line.trim();
       if (!trimmedLine) return null;
       
-      // Check if line starts with bullet points
       if (trimmedLine.startsWith('-') || trimmedLine.startsWith('•') || trimmedLine.startsWith('*')) {
         return (
           <div key={index} className="description-line bullet-point">

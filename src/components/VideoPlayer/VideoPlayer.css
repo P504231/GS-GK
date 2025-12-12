@@ -117,4 +117,46 @@
   .video-container.full .video-wrapper {
     max-width: 100%;
   }
+  /* Fullscreen styles for VideoPlayer */
+.video-container--fullscreen {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.youtube-iframe--fullscreen {
+  width: 100%;
+  height: 90vh !important;
+  min-height: 80vh;
+  border-radius: 12px;
+}
+
+/* Video Info */
+.video-info {
+  padding: var(--space-md);
+  text-align: center;
+  background: rgba(31, 34, 41, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  margin-top: -4px;
+}
+
+.video-title {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.video-category {
+  display: inline-block;
+  background: rgba(255, 77, 109, 0.2);
+  color: var(--color-primary-light);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
 }
