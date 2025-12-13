@@ -53,24 +53,16 @@ const gsVideos = [
     category: "Science",
   },
   {
+    youtubeLink: "https://www.youtube.com/shorts/yjq1O48yeTU",
+    category: "Science",
+  },
+  {
     youtubeLink: "https://www.youtube.com/shorts/anYAY7CVcyE",
     category: "Science",
   },
    /* ===========================================Scheme=========================================== */
   {
-    youtubeLink: "https://www.youtube.com/watch?v=ZDUajSr43FQ",
-    category: "Scheme",
-  },
-  {
-    youtubeLink: "https://www.youtube.com/shorts/nJ6DzJJ5Kv4",
-    category: "Scheme",
-  },
-  {
-    youtubeLink: "https://www.youtube.com/shorts/75XeEnSpbbI",
-    category: "Scheme",
-  },
-  {
-    youtubeLink: "https://www.youtube.com/watch?v=dyDHX04aRSU",
+    youtubeLink: "https://www.youtube.com/watch?v=gcGaOnIqHUs",
     category: "Scheme",
   },
     /* ===========================================AEDO=========================================== */
@@ -101,7 +93,30 @@ const gsVideos = [
   {
     youtubeLink:"https://www.youtube.com/watch?v=Zn6F8xVftX4",
     category:"AEDO",
-  }
+  },
+   /* ===========================================Current Affairs=========================================== */
+  {
+    youtubeLink:"https://www.youtube.com/shorts/1j79TVodSVc",
+    category:"Current Affairs"
+  },
+   /* ===========================================Static GK=========================================== */
+  {
+    youtubeLink:"https://www.youtube.com/watch?v=dEH3cio_mw0",
+    category:"Static GK"
+  },
+  {
+    youtubeLink:"https://www.youtube.com/watch?v=7FC0ar8RIVU",
+    category:"Static GK"
+  },
+  {
+    youtubeLink:"https://www.youtube.com/watch?v=r8i_lvEHzwg",
+    category:"Static GK"
+  },
+  {
+    youtubeLink:"https://www.youtube.com/watch?v=MBTsYamwQ5U",
+    category:"Static GK"
+  },
+  //
 ];
 
 // Auto-generate IDs based on index

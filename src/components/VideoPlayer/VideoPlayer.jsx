@@ -42,7 +42,7 @@ const VideoPlayer = ({ video }) => {
           src={embedSrc}
           title="GS Video"
           className="youtube-iframe"
-          frameBorder="0"
+          style={{ border: 'none' }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
           loading="lazy"

@@ -21,8 +21,9 @@ const Header = ({
   { name: "Scheme", icon: "📋", color: "#0d9488" },
   { name: "Current Affairs", icon: "📰", color: "#be185d" },
   { name: "Static GK", icon: "🧠", color: "#a16207" },
+  { name: "PDF Notes", icon: "📄", color: "#0ea5e9" },
   { name: "Pictorial Notes", icon: "🎨", color: "#db2777" },
-  { name: "PDF Notes", icon: "📄", color: "#0ea5e9" },  // ⭐ NEW
+  {name: "Extra", icon: "🕺", color: "#ffff0add" },
 ];
 
 

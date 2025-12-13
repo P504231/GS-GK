@@ -82,7 +82,7 @@ const GoogleDrivePdfViewer = ({
           width="100%"
           height="100%"
           title={`${title} - PDF Viewer`}
-          frameBorder="0"
+          style={{ border: 'none' }}
           onLoad={handleIframeLoad}
           onError={handleIframeError}
           className="gd-pdf-fullscreen-iframe"
@@ -123,7 +123,7 @@ const GoogleDrivePdfViewer = ({
           width={width}
           height={height}
           title={`Google Drive PDF: ${title}`}
-          frameBorder="0"
+          style={{ border: 'none' }}
           onLoad={handleIframeLoad}
           onError={handleIframeError}
           className="gd-pdf-iframe"
@@ -132,7 +132,7 @@ const GoogleDrivePdfViewer = ({
         />
       </div>
       
-      <div className="gd-pdf-controls">
+      {/* <div className="gd-pdf-controls">
         <a
           href={`https://drive.google.com/uc?export=download&id=${cleanFileId}`}
           target="_blank"
@@ -157,7 +157,7 @@ const GoogleDrivePdfViewer = ({
         >
           ↻ Refresh
         </button>
-      </div>
+      </div> */}
       
       <div className="gd-pdf-help">
         <p className="help-text">

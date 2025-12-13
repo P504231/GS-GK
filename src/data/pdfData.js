@@ -1,9 +1,8 @@
 const pdfData = [
   // ========= PDF NOTES =========
-
   {
-    title: "Dances India",
-    pdfLink: "https://drive.google.com/file/d/1FmDfmvHQ8uBkX9e4JMi1A0AajMzdCS43/view",
+    title: "CURRENT AFFAIRS FULL COMPILATION",
+    pdfLink: "https://drive.google.com/file/d/15eB06EmYE1-BaAw23pdJr0Vpb1sqlNxM/view",
     category: "PDF Notes",
   },
   {
@@ -34,6 +33,11 @@ const pdfData = [
   {
     title: "IPG_const_copy",
     pdfLink: "https://drive.google.com/file/d/1w2zuqWXY4AwgxXn73KXQuBPaBoumCXmy/view",
+    category: "PDF Notes",
+  },
+   {
+    title: "Dances India",
+    pdfLink: "https://drive.google.com/file/d/1FmDfmvHQ8uBkX9e4JMi1A0AajMzdCS43/view",
     category: "PDF Notes",
   },
 ];

@@ -15,7 +15,7 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
   color: var(--color-text-primary);
 }
 
@@ -244,4 +244,7 @@
   .iframe-wrapper {
     min-height: 400px;
   }
+  .gd-pdf-fullscreen-iframe {
+  border: none;  /* or border: 0; */
+}
 }
