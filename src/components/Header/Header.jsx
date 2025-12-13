@@ -11,7 +11,7 @@ const Header = ({
   hasNext,
 }) => {
   const categories = [
-  { name: "All", icon: "📚", color: "#6d28d9" },
+  { name: "Welcome", icon: "🏠", color: "#6d28d9" },
   { name: "AEDO", icon: "🏢", color: "#113300" },
   { name: "Polity", icon: "⚖️", color: "#dc2626" },
   { name: "History", icon: "🏛️", color: "#059669" },
@@ -29,7 +29,7 @@ const Header = ({
 
   // Get current category color
   const currentCategory = categories.find(cat => 
-    cat.name === (categoryFilter || "All")
+    cat.name === (categoryFilter || "Welcome")
   );
   const activeColor = currentCategory?.color || "#6d28d9";
 
@@ -100,8 +100,8 @@ const Header = ({
 
             {/* Active Category Badge */}
             <div className="active-category-badge" style={{ backgroundColor: activeColor }}>
-              <span className="badge-icon">{currentCategory?.icon || "📚"}</span>
-              <span className="badge-text">{categoryFilter || "All"}</span>
+              <span className="badge-icon">{currentCategory?.icon || "🏠"}</span>
+              <span className="badge-text">{categoryFilter || "Welcome"}</span>
             </div>
           </div>
         </div>
@@ -115,12 +115,12 @@ const Header = ({
           
           <div className="category-filters-scroll">
             {categories.map(category => {
-              const isActive = categoryFilter === (category.name === "All" ? "" : category.name);
+              const isActive = categoryFilter === (category.name === "Welcome" ? "" : category.name);
               return (
                 <button
                   key={category.name}
                   className={`category-filter-btn ${isActive ? 'active' : ''}`}
-                  onClick={() => setCategoryFilter(category.name === "All" ? "" : category.name)}
+                  onClick={() => setCategoryFilter(category.name === "Welcome" ? "" : category.name)}
                   style={{
                     '--category-color': category.color,
                     backgroundColor: isActive ? category.color : 'transparent'

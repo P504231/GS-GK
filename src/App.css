@@ -531,3 +531,55 @@ body {
   .header, .app-footer, .progress-indicator, .bottom-row { display: none; }
   .main-content { overflow: visible; height: auto; }
 }
+/* Add these to your existing App.css */
+
+/* Home button positioning */
+.home-button {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.home-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+}
+
+.home-button .btn-tooltip {
+  position: absolute;
+  right: 70px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.home-button:hover .btn-tooltip {
+  opacity: 1;
+}
+
+/* Adjust fullscreen button position when home button is present */
+.fullscreen-toggle-btn {
+  position: fixed;
+  bottom: 170px; /* Adjusted to be above home button */
+  right: 30px;
+  /* ... rest of your existing styles ... */
+}

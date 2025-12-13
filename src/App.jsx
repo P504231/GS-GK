@@ -8,8 +8,9 @@ import ImageShower from './components/ImageShower/ImageShower';
 import GoogleDrivePdfViewer from './components/PdfViewer/GoogleDrivePdfViewer';
 import ProgressIndicator from './components/ProgressIndicator/ProgressIndicator';
 import NoData from './components/NoData/NoData';
+import WelcomePage from './components/WelcomePage/WelcomePage'; // You'll need to create this
 import { extractYouTubeID, isYouTubeShort } from './utils/youtube';
-import { Maximize2, Minimize2 } from 'lucide-react';
+import { Maximize2, Minimize2, Home } from 'lucide-react';
 import './App.css';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   const [allContent, setAllContent] = useState([]);
   const [filteredContent, setFilteredContent] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [categoryFilter, setCategoryFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState(''); // Empty means Welcome page
   const [loading, setLoading] = useState(true);
   const [dotsReady, setDotsReady] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -49,7 +50,7 @@ function App() {
     const enrichedPdfNotes = pdfData.map((pdf, i) => {
       let fileId = pdf.fileId;
       if (!fileId && pdf.pdfLink) {
-        const match = pdf.pdfLink.match(/\/d\/([^/]+)/); // Removed: \/
+        const match = pdf.pdfLink.match(/\/d\/([^/]+)/);
         if (match) {
           fileId = match[1];
         }
@@ -70,7 +71,7 @@ function App() {
     setPictorialNotes(enrichedNotes);
     setPdfNotes(enrichedPdfNotes);
     setAllContent(combined);
-    setFilteredContent(combined);
+    setFilteredContent([]); // Start with empty for Welcome page
     setLoading(false);
   }, []);
 
@@ -81,7 +82,7 @@ function App() {
     let filtered;
 
     if (categoryFilter === '') {
-      filtered = allContent;
+      filtered = []; // Empty array means show Welcome page
     } else if (categoryFilter === 'Pictorial Notes') {
       filtered = pictorialNotes;
     } else if (categoryFilter === 'PDF Notes') {
@@ -93,6 +94,14 @@ function App() {
     setFilteredContent(filtered);
     setCurrentIndex(0);
   }, [categoryFilter, allContent, pictorialNotes, pdfNotes]);
+
+  // Reset to Welcome page when no category filter
+  useEffect(() => {
+    if (categoryFilter === '') {
+      setFilteredContent([]);
+      setCurrentIndex(0);
+    }
+  }, [categoryFilter]);
 
   // Prevent double-dot rendering when category changes
   useEffect(() => {
@@ -114,11 +123,19 @@ function App() {
   const hasNext = currentIndex < filteredContent.length - 1;
 
   const goNext = useCallback(() => {
+    if (filteredContent.length === 0) return; // Don't navigate on Welcome page
     setCurrentIndex(i => Math.min(i + 1, filteredContent.length - 1));
   }, [filteredContent.length]);
 
   const goPrev = useCallback(() => {
+    if (filteredContent.length === 0) return; // Don't navigate on Welcome page
     setCurrentIndex(i => Math.max(i - 1, 0));
+  }, [filteredContent.length]);
+
+  // Go to Welcome page
+  const goToWelcome = useCallback(() => {
+    setCategoryFilter('');
+    setCurrentIndex(0);
   }, []);
 
   // Toggle fullscreen mode
@@ -163,7 +180,13 @@ function App() {
   // Keyboard shortcuts
   useEffect(() => {
     const handler = e => {
-      if (filteredContent.length === 0) return;
+      // Disable navigation shortcuts on Welcome page
+      if (filteredContent.length === 0) {
+        if (e.key === 'Escape' && isFullscreen) {
+          toggleFullscreen();
+        }
+        return;
+      }
       
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goNext();
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goPrev();
@@ -176,13 +199,20 @@ function App() {
       if (e.key === 'Escape' && isFullscreen) {
         toggleFullscreen();
       }
+      
+      // Home key to go to Welcome page
+      if (e.key === 'Home' || e.key === 'h' || e.key === 'H') {
+        e.preventDefault();
+        goToWelcome();
+      }
     };
     
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [goNext, goPrev, filteredContent.length, toggleFullscreen, isFullscreen]);
+  }, [goNext, goPrev, filteredContent.length, toggleFullscreen, isFullscreen, goToWelcome]);
 
   const currentItem = filteredContent[currentIndex];
+  const isWelcomePage = categoryFilter === '';
 
   // Progress for notes - SIMPLIFIED (no timer to hide progress)
   useEffect(() => {
@@ -203,32 +233,33 @@ function App() {
   }, [filteredContent]);
 
   const currentDotIndex = useMemo(() => {
-    if (!currentItem || !dotsReady) return -1;
+    if (!currentItem || !dotsReady || isWelcomePage) return -1;
     return itemsWithDots.findIndex(item => item.id === currentItem.id);
-  }, [currentItem, itemsWithDots, dotsReady]);
+  }, [currentItem, itemsWithDots, dotsReady, isWelcomePage]);
 
   const handleDotClick = useCallback(
     index => {
+      if (isWelcomePage) return;
       const selectedItem = itemsWithDots[index];
       const actual = filteredContent.findIndex(i => i.id === selectedItem.id);
       if (actual !== -1) setCurrentIndex(actual);
     },
-    [filteredContent, itemsWithDots]
+    [filteredContent, itemsWithDots, isWelcomePage]
   );
 
-  // Check if current content type supports maximize button (REVERSED LOGIC)
+  // Check if current content type supports maximize button
   const shouldShowMaximizeButton = useMemo(() => {
-    if (!currentItem) return false;
+    if (!currentItem || isWelcomePage) return false;
     // Show maximize button for images and PDFs, hide for videos
     return currentItem.type === 'image' || currentItem.type === 'pdf';
-  }, [currentItem]);
+  }, [currentItem, isWelcomePage]);
 
-  // Check if we should show exit button in fullscreen (REVERSED LOGIC)
+  // Check if we should show exit button in fullscreen
   const shouldShowExitButtonInFullscreen = useMemo(() => {
-    if (!currentItem) return false;
+    if (!currentItem || isWelcomePage) return false;
     // Show exit button for images and PDFs in fullscreen, hide for videos
     return isFullscreen && (currentItem.type === 'image' || currentItem.type === 'pdf');
-  }, [currentItem, isFullscreen]);
+  }, [currentItem, isFullscreen, isWelcomePage]);
 
   if (loading) {
     return (
@@ -240,6 +271,7 @@ function App() {
   }
 
   const shouldShowProgress =
+    !isWelcomePage &&
     filteredContent.length > 0 &&
     (currentItem?.type === "video" ||
       currentItem?.type === "pdf" ||
@@ -250,7 +282,7 @@ function App() {
       {/* Header - Hidden in Fullscreen */}
       {!isFullscreen && (
         <Header
-          totalContent={filteredContent.length}
+          totalContent={isWelcomePage ? 0 : filteredContent.length}
           categoryFilter={categoryFilter}
           setCategoryFilter={setCategoryFilter}
           onPrev={goPrev}
@@ -261,7 +293,17 @@ function App() {
       )}
 
       <main className="main-content">
-        {filteredContent.length === 0 ? (
+        {isWelcomePage ? (
+          <WelcomePage 
+            totalContent={allContent.length}
+            categories={[
+              "AEDO", "Polity", "History", "Geography", "Economics", 
+              "Science", "Scheme", "Current Affairs", "Static GK", 
+              "PDF Notes", "Pictorial Notes", "Extra"
+            ]}
+            onCategorySelect={setCategoryFilter}
+          />
+        ) : filteredContent.length === 0 ? (
           <NoData />
         ) : (
           <>
@@ -298,8 +340,21 @@ function App() {
         )}
       </main>
 
+      {/* Home Button - Show when not on Welcome page and not in fullscreen */}
+      {!isFullscreen && !isWelcomePage && (
+        <button
+          className="home-button"
+          onClick={goToWelcome}
+          title="Go to Home (H)"
+          aria-label="Go to home page"
+        >
+          <Home size={20} />
+          <span className="btn-tooltip">Home</span>
+        </button>
+      )}
+
       {/* Floating Fullscreen Button - Only show for images and PDFs when NOT in fullscreen */}
-      {filteredContent.length > 0 && !isFullscreen && shouldShowMaximizeButton && (
+      {!isWelcomePage && filteredContent.length > 0 && !isFullscreen && shouldShowMaximizeButton && (
         <button
           className="fullscreen-toggle-btn"
           onClick={toggleFullscreen}

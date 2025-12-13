@@ -1,138 +1,82 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import './NoData.css';
 
 const NoData = ({ 
-  categoryFilter, 
-  totalItems = 0, 
-  pictorialNotesCount = 0, 
-  videosCount = 0,
-  onShowAll,
-  onBack
+  title = "No Content Available", 
+  description = "We couldn't find any content for the selected category.",
+  stats = { total: 0, available: 0, upcoming: 0 },
+  primaryAction = null,
+  onWelcomeClick = () => window.location.href = '/', // Default welcome navigation
+  onBack = () => window.history.back()
 }) => {
-  const { title, message, stats } = useMemo(() => {
-    let title, message;
-    
-    if (categoryFilter === 'Pictorial Notes') {
-      title = 'No Pictorial Notes';
-      message = 'There are no pictorial notes in this category yet.';
-    } else if (categoryFilter) {
-      title = `No ${categoryFilter} Content`;
-      message = `No "${categoryFilter}" content found. Try another category or show all content.`;
-    } else {
-      title = 'No Content Available';
-      message = 'No content has been loaded. Please check your data source.';
-    }
-
-    const stats = [
-      { icon: '📊', value: totalItems, label: 'Total Items' },
-      { icon: '🎬', value: videosCount, label: 'Videos' },
-      { icon: '📷', value: pictorialNotesCount, label: 'Pictorial Notes' }
-    ];
-
-    return { title, message, stats };
-  }, [categoryFilter, totalItems, pictorialNotesCount, videosCount]);
-
-  const hasBackButton = onBack && categoryFilter;
-
   return (
-    <div className="no-data-container">
-      {/* Illustration Section */}
-      <div className="no-data-illustration">
-        <div className="illustration-wrapper">
-          <svg className="illustration-svg" viewBox="0 0 120 120" fill="none">
-            <circle 
-              className="outer-circle" 
-              cx="60" cy="60" r="55" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeDasharray="6 6"
-            />
-            <g className="search-icon">
-              <circle 
-                cx="45" cy="45" r="20" 
-                stroke="currentColor" 
-                strokeWidth="3"
-              />
-              <path 
-                d="M75 75L95 95" 
-                stroke="currentColor" 
-                strokeWidth="3" 
-                strokeLinecap="round"
-              />
-            </g>
-            <g className="empty-folder" opacity="0.5">
-              <path 
-                d="M30 70L35 65H85L90 70" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round"
-              />
-              <rect 
-                x="30" y="40" width="60" height="25" rx="3" 
-                stroke="currentColor" 
-                strokeWidth="2"
-              />
-            </g>
-            <circle 
-              className="inner-circle" 
-              cx="60" cy="60" r="30" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              opacity="0.2"
-            />
-          </svg>
-        </div>
+    <div className="nd-container" role="alert" aria-live="polite">
+      {/* Animated Illustration */}
+      <div className="nd-illustration">
+        <svg className="nd-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="95" className="nd-outer-circle" strokeWidth="2" fill="none" />
+          <circle cx="100" cy="100" r="75" className="nd-inner-circle" strokeWidth="1.5" fill="none" />
+          <path d="M70,70 L130,130" className="nd-search-icon" strokeWidth="3" strokeLinecap="round" />
+          <path d="M130,70 L70,130" className="nd-search-icon" strokeWidth="3" strokeLinecap="round" />
+          <path d="M85,130 L115,130" className="nd-folder" strokeWidth="2" strokeLinecap="round" />
+          <rect x="80" y="110" width="40" height="20" className="nd-folder" strokeWidth="2" fill="none" />
+        </svg>
       </div>
-      
-      {/* Content Section */}
-      <div className="no-data-content">
-        <h1 className="no-data-title">{title}</h1>
-        
-        <p className="no-data-description">
-          {message}
-        </p>
-        
-        {/* Stats Section */}
-        <div className="no-data-stats">
-          {stats.map((stat, index) => (
-            <div key={index} className="stat-card">
-              <div className="stat-icon">{stat.icon}</div>
-              <div className="stat-value">{stat.value}</div>
-              <div className="stat-label">{stat.label}</div>
-            </div>
-          ))}
+
+      {/* Content */}
+      <div className="nd-content">
+        <h1 className="nd-title">{title}</h1>
+        <p className="nd-description">{description}</p>
+
+        {/* Stats */}
+        <div className="nd-stats">
+          <div className="nd-stat-card">
+            <div className="nd-stat-icon">📊</div>
+            <div className="nd-stat-value">{stats.total}</div>
+            <div className="nd-stat-label">Total Items</div>
+          </div>
+          <div className="nd-stat-card">
+            <div className="nd-stat-icon">✅</div>
+            <div className="nd-stat-value">{stats.available}</div>
+            <div className="nd-stat-label">Available</div>
+          </div>
+          <div className="nd-stat-card">
+            <div className="nd-stat-icon">⏳</div>
+            <div className="nd-stat-value">{stats.upcoming}</div>
+            <div className="nd-stat-label">Upcoming</div>
+          </div>
         </div>
-        
-        {/* Actions Section */}
-        <div className="no-data-actions">
-          {onShowAll && (
+
+        {/* Actions */}
+        <div className="nd-actions">
+          {primaryAction && (
             <button 
-              onClick={onShowAll}
-              className="action-btn btn-primary"
-              aria-label="Show all content"
+              className="nd-btn nd-btn-primary"
+              onClick={primaryAction.onClick}
+              aria-label={primaryAction.label}
             >
-              <span className="btn-icon" role="img" aria-hidden="true">🔍</span>
-              <span className="btn-text">Show All Content</span>
+              <span className="nd-btn-icon">{primaryAction.icon || "🔍"}</span>
+              <span className="nd-btn-text">{primaryAction.text || "Explore Content"}</span>
             </button>
           )}
           
-          {hasBackButton && (
-            <button 
-              onClick={onBack}
-              className="action-btn btn-secondary"
-              aria-label="Back to categories"
-            >
-              <span className="btn-icon" role="img" aria-hidden="true">↩️</span>
-              <span className="btn-text">Back to Categories</span>
-            </button>
-          )}
-          
-          {!hasBackButton && onShowAll && (
-            <div className="action-hint" role="note">
-              <span className="hint-icon" role="img" aria-hidden="true">💡</span>
-              <span className="hint-text">Select a different category from the header</span>
-            </div>
-          )}
+          {/* Welcome Button */}
+          <button 
+            className="nd-btn nd-btn-welcome"
+            onClick={onWelcomeClick}
+            aria-label="Return to welcome page"
+          >
+            <span className="nd-btn-icon">🏠</span>
+            <span className="nd-btn-text">Back to Welcome</span>
+          </button>
+
+          {/* Quick Tip */}
+          <div className="nd-hint">
+            <span className="nd-hint-icon">💡</span>
+            <span className="nd-hint-text">
+              Try selecting a different category or check back later for updates
+            </span>
+          </div>
         </div>
       </div>
     </div>
